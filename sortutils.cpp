@@ -1,21 +1,30 @@
 // Implementation file for assignment 4 :D
-#include "sortutils.hpp";
-#include <iostream>;
-// const std::size_t HOW_MANY_ELEMENTS = 250000;
-// const std::uint8_t HOW_MANY_TIMES = 25;
-// using SourceArray = stad::array<int, HOW_MANY_ELEMENTS>;
-// void initializeRawArrayFromStdArray(const SourceArray &source, int dest[]);
-// void orgainPipeStdArray(SourceArray &data);
-// void evaluateRawArray(const SourceArray &random, const SourceArray &sorted,
-//                      const SourceArray &sorted, const SourceArray &reversed,
-//                      const SourceArray &organPipe, const SourceArray
-//                      &rotated);
-// void evaluateStdArray(const SourceArray &random, const SourceArray &sorted,
-//                      const SourceArray &sorted, const SourceArray &reversed,
-//                      const SourceArray &organPipe, const SourceArray
-//                      &rotated);
-// void evaluateStdVector(const SourceArray &random, const SourceArray &sorted,
-/*                       const SourceArray &sorted, const SourceArray &reversed,
+#include "sortutils.hpp"
+#include <algorithm>
+#include <iostream>
+#include <random>
+void initializeRawArrayFromStdArray(const SourceArray &source, int dest[]) {
+  std::cout << "initalizing raw array from std array..." << std::endl;
+  for (long unsigned int i = 0; i < source.size(); i++) {
+    dest[i] = source[i];
+  }
+}
+void orgainPipeStdArray(SourceArray &data) {
+  std::cout << "doing organ pipe..." << std::endl;
+}
+void evaluateRawArray(const SourceArray &random, const SourceArray &sorted,
+                      const SourceArray &reversed, const SourceArray &organPipe,
+                      const SourceArray &rotated) {
+  std::cout << "doing evaluating raw array.." << std::endl;
+}
+void evaluateStdArray(const SourceArray &random, const SourceArray &sorted,
+                      const SourceArray &reversed, const SourceArray &organPipe,
+                      const SourceArray &rotated) {
+  std::cout << "doing evaluating std array.." << std::endl;
+}
+void evaluateStdVector(const SourceArray &random, const SourceArray &sorted,
+                       const SourceArray &reversed,
                        const SourceArray &organPipe,
-                       const SourceArray &rotated);
-*/
+                       const SourceArray &rotated) {
+  std::cout << "doing evaluating raw vector.." << std::endl;
+}
