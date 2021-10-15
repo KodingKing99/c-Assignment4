@@ -13,8 +13,12 @@ SourceArray generateMyRandomArray() {
   return array;
 }
 void sortMyArray(SourceArray &array) { std::sort(array.begin(), array.end()); }
-void reverseMyArray(SourceArray &array) { std::reverse(array.begin(), array.end()); }
-void rotateMyArray(SourceArray &array) { std::rotate(array.begin(), (array.begin() + 1), array.end()); }
+void reverseMyArray(SourceArray &array) {
+  std::reverse(array.begin(), array.end());
+}
+void rotateMyArray(SourceArray &array) {
+  std::rotate(array.begin(), (array.begin() + 1), array.end());
+}
 SourceArray sorted() {
   SourceArray array = generateMyRandomArray();
   sortMyArray(array);
@@ -39,49 +43,38 @@ SourceArray mkOrganPipe() {
   return organPipe;
 }
 int main() {
-  std::cout << "Hello World" << std::endl;
+  // std::cout << "Hello World" << std::endl;
   auto randomArray = generateMyRandomArray();
-  std::cout << "generated array: " << std::endl;
-  for (int i = 0; i < 10; i++) {
-    std::cout << randomArray[i] << std::endl;
-  }
-  int intArray[HOW_MANY_ELEMENTS];
-  initializeRawArrayFromStdArray(randomArray, intArray);
-  std::cout << "int array after initialization: " << std::endl;
+  // std::cout << "generated array: " << std::endl;
+  // for (int i = 0; i < 10; i++) {
+  //   std::cout << randomArray[i] << std::endl;
+  // }
+  // int intArray[HOW_MANY_ELEMENTS];
+  // initializeRawArrayFromStdArray(randomArray, intArray);
+  // std::cout << "int array after initialization: " << std::endl;
 
-  for (int i = 0; i < 10; i++) {
-    std::cout << intArray[i] << std::endl;
-  }
-  // orgainPipeStdArray(array);
-  // auto sortedArray = generateMyRandomArray();
-  // sortMyArray(sortedArray);
+  // for (int i = 0; i < 10; i++) {
+  //   std::cout << intArray[i] << std::endl;
+  // }
   auto sortedArray = sorted();
-  std::cout << "sorted Array: " << std::endl;
-  for (int i = 0; i < 10; i++) {
-    std::cout << sortedArray[i] << std::endl;
-  }
-  // auto reversedArray = generateMyRandomArray();
-  // sortMyArray(reversedArray);
-  // reverseMyArray(reversedArray);
+  // std::cout << "sorted Array: " << std::endl;
+  // for (int i = 0; i < 10; i++) {
+  //   std::cout << sortedArray[i] << std::endl;
+  // }
   auto reversedArray = reversed();
-  std::cout << "reversed Array: " << std::endl;
-  for (int i = 0; i < 100; i++) {
-    std::cout << reversedArray[i] << std::endl;
-  }
-  // auto rotatedArray = generateMyRandomArray();
-  // sortMyArray(rotatedArray);
-  // rotateMyArray(rotatedArray);
+  // std::cout << "reversed Array: " << std::endl;
+  // for (int i = 0; i < 100; i++) {
+  //   std::cout << reversedArray[i] << std::endl;
+  // }
   auto rotatedArray = rotated();
-  std::cout << "rotated Array: " << std::endl;
-  for (int i = 0; i < 10; i++) {
-    std::cout << rotatedArray[i] << std::endl;
-  }
+  // std::cout << "rotated Array: " << std::endl;
+  // for (int i = 0; i < 10; i++) {
+  //   std::cout << rotatedArray[i] << std::endl;
+  // }
   // std::cou
-  std::cout << "last element: " << rotatedArray[rotatedArray.size() - 1]
-            << std::endl;
+  // std::cout << "last element: " << rotatedArray[rotatedArray.size() - 1]
+  //           << std::endl;
   auto organPipe = mkOrganPipe();
-  // auto rawArray = generateMyRandomArray();
-  // initializeRawArrayFromStdArray(rawArray, )
   evaluateRawArray(randomArray, sortedArray, reversedArray, organPipe,
                    rotatedArray);
 

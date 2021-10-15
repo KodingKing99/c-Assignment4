@@ -4,6 +4,7 @@
 #include <chrono>
 #include <iostream>
 #include <random>
+// #include <execution>
 bool isEvan(int num) {
   if (num % 2 == 0) {
     return true;
@@ -12,13 +13,35 @@ bool isEvan(int num) {
   }
 }
 void initializeRawArrayFromStdArray(const SourceArray &source, int dest[]) {
-  std::cout << "initalizing raw array from std array..." << std::endl;
   std::copy(source.begin(), source.end(), dest);
 }
-void sortRaw(int raw[]) {
-  // std::sort(raw, raw.si);
-  std::cout << "sorting raw array..." << std::endl;
-  std::sort(raw, raw + HOW_MANY_ELEMENTS);
+void timeRawArraySeq(SourceArray data) {
+  using namespace std::chrono;
+  duration<double> totalTime = steady_clock::duration::zero();
+  for (int i = 0; i < HOW_MANY_TIMES; i++) {
+    int raw[HOW_MANY_ELEMENTS];
+    initializeRawArrayFromStdArray(data, raw);
+    auto t0 = steady_clock::now();
+    // std::sort(std::execution::seq, raw, raw + HOW_MANY_ELEMENTS);
+    std::sort(raw, raw + HOW_MANY_ELEMENTS);
+    auto t1 = steady_clock::now();
+    totalTime += t1 - t0;
+  }
+  std::cout << "Sort took " << totalTime.count() << " seconds" << std::endl;
+}
+void timeRawArrayPar(SourceArray data) {
+  using namespace std::chrono;
+  duration<double> totalTime = steady_clock::duration::zero();
+  for (int i = 0; i < HOW_MANY_TIMES; i++) {
+    int raw[HOW_MANY_ELEMENTS];
+    initializeRawArrayFromStdArray(data, raw);
+    auto t0 = steady_clock::now();
+    // std::sort(std::execution::par, raw, raw + HOW_MANY_ELEMENTS);
+    std::sort(raw, raw + HOW_MANY_ELEMENTS);
+    auto t1 = steady_clock::now();
+    totalTime += t1 - t0;
+  }
+  std::cout << "Sort took " << totalTime.count() << " seconds" << std::endl;
 }
 void organPipeStdArray(SourceArray &data) {
   std::cout << "doing organ pipe..." << std::endl;
@@ -44,47 +67,20 @@ void organPipeStdArray(SourceArray &data) {
 void evaluateRawArray(const SourceArray &random, const SourceArray &sorted,
                       const SourceArray &reversed, const SourceArray &organPipe,
                       const SourceArray &rotated) {
-  std::cout << "doing evaluating raw array.." << std::endl;
-  using namespace std::chrono;
-  int randomIntArr[HOW_MANY_ELEMENTS];
-  initializeRawArrayFromStdArray(random, randomIntArr);
-  int sortedIntA[HOW_MANY_ELEMENTS];
-  initializeRawArrayFromStdArray(sorted, sortedIntA);
-  int reversedIntA[HOW_MANY_ELEMENTS];
-  initializeRawArrayFromStdArray(reversed, reversedIntA);
-  int organPipeIntA[HOW_MANY_ELEMENTS];
-  initializeRawArrayFromStdArray(organPipe, organPipeIntA);
-  int rotatedIntA[HOW_MANY_ELEMENTS];
-  initializeRawArrayFromStdArray(rotated, rotatedIntA);
-  // int randomIntArr[HOW_MANY_ELEMENTS];
-  // initializeRawArrayFromStdArray(random, randomIntArr);
+  std::cout << "Evaluating Raw Array.." << std::endl;
+  std::cout << "Timing Sequentially..." << std::endl;
+  timeRawArraySeq(random);
+  timeRawArraySeq(sorted);
+  timeRawArraySeq(reversed);
+  timeRawArraySeq(organPipe);
+  timeRawArraySeq(rotated);
 
-  std::cout << "sorting random." << std::endl;
-  auto begin = steady_clock::now();
-  sortRaw(randomIntArr);
-  auto t0 = steady_clock::now();
-  std::cout << "sorting sorted Array." << std::endl;
-  sortRaw(sortedIntA);
-  auto t1 = steady_clock::now();
-  std::cout << "sorting reversed" << std::endl;
-  sortRaw(reversedIntA);
-  auto t2 = steady_clock::now();
-  //   std::cout << "sorting organPipe." << std::endl;
-  //   sortRaw(organPipeIntA);
-  //   auto t3 = steady_clock::now();
-  //   std::cout << "sorting rotated." << std::endl;
-  //   sortRaw(rotatedIntA);
-  //   auto t4 = steady_clock::now();
-  //   auto duration0 = nanoseconds(t0 - begin);
-  //   auto duration1 = nanoseconds(t1 - t0);
-  //   auto duration2 = nanoseconds(t2 - t1);
-  //   auto duration3 = nanoseconds(t3 - t2);
-  //   auto duration4 = nanoseconds(t4 - t3);
-  //   std::cout << "duration for random: " << duration0.count() << std::endl;
-  //   std::cout << "duration for random: " << duration1.count() << std::endl;
-  //   std::cout << "duration for random: " << duration2.count() << std::endl;
-  //   std::cout << "duration for random: " << duration3.count() << std::endl;
-  //   std::cout << "duration for random: " << duration4.count() << std::endl;
+  std::cout << "Timing Parallel..." << std::endl;
+  timeRawArrayPar(random);
+  timeRawArrayPar(sorted);
+  timeRawArrayPar(reversed);
+  timeRawArrayPar(organPipe);
+  timeRawArrayPar(rotated);
 }
 void evaluateStdArray(const SourceArray &random, const SourceArray &sorted,
                       const SourceArray &reversed, const SourceArray &organPipe,
