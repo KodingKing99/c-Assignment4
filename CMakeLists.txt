@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.12)
 #
 # Manually specifying all the source files.
 #
-set(PROJECT_NAME SortUtils) 
+set(PROJECT_NAME ArrayPerformance) 
 project(${PROJECT_NAME})
 
 set(HEADER_FILES
@@ -36,11 +36,11 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set_target_properties(ArrayPerformance PROPERTIES LINK_FLAGS "/STACK:100000000")
     set_target_properties(UnitTestRunner PROPERTIES LINK_FLAGS "/STACK:100000000")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
-    target_compile_options(UnitTestRunner PRIVATE -Wall -Wextra -pedantic)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Wl,--stack,10000000 -O3)
+    target_compile_options(UnitTestRunner PRIVATE -Wall -Wextra -pedantic -Wl,--stack,10000000 -O3)
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
-    target_compile_options(UnitTestRunner PRIVATE -Wall -Wextra -pedantic)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Wl,--stack,10000000 -O3)
+    target_compile_options(UnitTestRunner PRIVATE -Wall -Wextra -pedantic -Wl,--stack,10000000 -O3)
 endif()
 
 #
