@@ -20,26 +20,24 @@ SourceArray generateRandomArray() {
   return array;
 }
 
-// TEST(OrganPipeArray, DoesGenerateCorrectly)
-// {
-//     auto sourceArray = generateRandomArray();
-//     std::sort(sourceArray.begin(), sourceArray.end());
-//     auto array = sourceArray;
-//     organPipeStdArray(array);
+TEST(OrganPipeArray, DoesGenerateCorrectly) {
+  auto sourceArray = generateRandomArray();
+  std::sort(sourceArray.begin(), sourceArray.end());
+  auto array = sourceArray;
+  organPipeStdArray(array);
 
-//     for (auto i = 0ul; i < sourceArray.size() / 2; i++)
-//     {
-//         ASSERT_EQ(sourceArray[i], array[i]) << "Organ pipe changed first half
-//         of array at position " << i;
-//     }
+  for (auto i = 0ul; i < sourceArray.size() / 2; i++) {
+    ASSERT_EQ(sourceArray[i], array[i])
+        << "Organ pipe changed first half of array at position " << i;
+  }
 
-//     for (std::size_t first = 0ul, second = array.size() - 1; first < second;
-//     first++, second--)
-//     {
-//         ASSERT_EQ(array[first], array[second]) << "Organ pipe not symmetric
-//         at positions " << first << " and " << second;
-//     }
-// }
+  for (std::size_t first = 0ul, second = array.size() - 1; first < second;
+       first++, second--) {
+    ASSERT_EQ(array[first], array[second])
+        << "Organ pipe not symmetric at positions " << first << " and "
+        << second;
+  }
+}
 
 TEST(RawArray, DoesInitializeFromStdArrayCorrectly) {
   const auto sourceArray = generateRandomArray();
