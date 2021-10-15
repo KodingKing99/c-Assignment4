@@ -77,6 +77,8 @@ int main() {
   auto organPipe = mkOrganPipe();
   evaluateRawArray(randomArray, sortedArray, reversedArray, organPipe,
                    rotatedArray);
+  evaluateStdArray(randomArray, sortedArray, reversedArray, organPipe,
+                   rotatedArray);
 
   return 0;
 }
