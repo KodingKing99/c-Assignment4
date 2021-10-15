@@ -60,7 +60,12 @@ int main() {
   std::cout << "last element: " << rotatedArray[rotatedArray.size() - 1]
             << std::endl;
   auto organPipe = generateMyRandomArray();
-  sortMyArray(rotatedArray);
-  organPipeStdArray(rotatedArray);
+  sortMyArray(organPipe);
+  organPipeStdArray(organPipe);
+  // auto rawArray = generateMyRandomArray();
+  // initializeRawArrayFromStdArray(rawArray, )
+  evaluateRawArray(randomArray, sortedArray, reversedArray, organPipe,
+                   rotatedArray);
+
   return 0;
 }

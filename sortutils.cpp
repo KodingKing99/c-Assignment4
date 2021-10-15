@@ -15,9 +15,11 @@ void initializeRawArrayFromStdArray(const SourceArray &source, int dest[]) {
   std::cout << "initalizing raw array from std array..." << std::endl;
   std::copy(source.begin(), source.end(), dest);
 }
-// void sortRaw(const SourceArray &raw){
-//   std::sort(std::begin(raw), std::end(raw));
-// }
+void sortRaw(int raw[]) {
+  // std::sort(raw, raw.si);
+  std::cout << "sorting raw array..." << std::endl;
+  std::sort(raw, raw + HOW_MANY_ELEMENTS);
+}
 void organPipeStdArray(SourceArray &data) {
   std::cout << "doing organ pipe..." << std::endl;
   std::cout << "data size: " << data.size() << std::endl;
@@ -43,34 +45,46 @@ void evaluateRawArray(const SourceArray &random, const SourceArray &sorted,
                       const SourceArray &reversed, const SourceArray &organPipe,
                       const SourceArray &rotated) {
   std::cout << "doing evaluating raw array.." << std::endl;
-  // using namespace std::chrono;
-  // auto begin = steady_clock::now();
-  // std::cout << "sorting random." << std::endl;
-  // sortRaw(random);
+  using namespace std::chrono;
+  int randomIntArr[HOW_MANY_ELEMENTS];
+  initializeRawArrayFromStdArray(random, randomIntArr);
+  int sortedIntA[HOW_MANY_ELEMENTS];
+  initializeRawArrayFromStdArray(sorted, sortedIntA);
+  int reversedIntA[HOW_MANY_ELEMENTS];
+  initializeRawArrayFromStdArray(reversed, reversedIntA);
+  int organPipeIntA[HOW_MANY_ELEMENTS];
+  initializeRawArrayFromStdArray(organPipe, organPipeIntA);
+  int rotatedIntA[HOW_MANY_ELEMENTS];
+  initializeRawArrayFromStdArray(rotated, rotatedIntA);
+  // int randomIntArr[HOW_MANY_ELEMENTS];
+  // initializeRawArrayFromStdArray(random, randomIntArr);
 
-  // auto t0 = steady_clock::now();
-  // std::cout << "sorting random." << std::endl;
-  // sortRaw(sorted);
-  // auto t1 = steady_clock::now();
-  // std::cout << "sorting reversed" << std::endl;
-  // sortRaw(reversed);
-  // auto t2 = steady_clock::now();
-  // std::cout << "sorting organPipe." << std::endl;
-  // sortRaw(organPipe);
-  // auto t3 = steady_clock::now();
-  // std::cout << "sorting rotated." << std::endl;
-  // sortRaw(rotated);
-  // auto t4 = steady_clock::now();
-  // auto duration0 = nanoseconds(t0 - begin);
-  // auto duration1 = nanoseconds(t1 - t0);
-  // auto duration2 = nanoseconds(t2 - t1);
-  // auto duration3 = nanoseconds(t3 - t2);
-  // auto duration4 = nanoseconds(t4 - t3);
-  // std::cout << "duration for random: " << duration0.count() <<std::endl;
-  // std::cout << "duration for random: " << duration1.count() << std::endl;
-  // std::cout << "duration for random: " << duration2.count() <<std::endl;
-  // std::cout << "duration for random: " << duration3.count() <<std::endl;
-  // std::cout << "duration for random: " << duration4.count() <<std::endl;
+  std::cout << "sorting random." << std::endl;
+  auto begin = steady_clock::now();
+  sortRaw(randomIntArr);
+  auto t0 = steady_clock::now();
+  std::cout << "sorting sorted Array." << std::endl;
+  sortRaw(sortedIntA);
+  auto t1 = steady_clock::now();
+  std::cout << "sorting reversed" << std::endl;
+  sortRaw(reversedIntA);
+  auto t2 = steady_clock::now();
+  //   std::cout << "sorting organPipe." << std::endl;
+  //   sortRaw(organPipeIntA);
+  //   auto t3 = steady_clock::now();
+  //   std::cout << "sorting rotated." << std::endl;
+  //   sortRaw(rotatedIntA);
+  //   auto t4 = steady_clock::now();
+  //   auto duration0 = nanoseconds(t0 - begin);
+  //   auto duration1 = nanoseconds(t1 - t0);
+  //   auto duration2 = nanoseconds(t2 - t1);
+  //   auto duration3 = nanoseconds(t3 - t2);
+  //   auto duration4 = nanoseconds(t4 - t3);
+  //   std::cout << "duration for random: " << duration0.count() << std::endl;
+  //   std::cout << "duration for random: " << duration1.count() << std::endl;
+  //   std::cout << "duration for random: " << duration2.count() << std::endl;
+  //   std::cout << "duration for random: " << duration3.count() << std::endl;
+  //   std::cout << "duration for random: " << duration4.count() << std::endl;
 }
 void evaluateStdArray(const SourceArray &random, const SourceArray &sorted,
                       const SourceArray &reversed, const SourceArray &organPipe,
