@@ -15,5 +15,5 @@ IndentPPDirectives: BeforeHash
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortLambdasOnASingleLine: Inline
 # BraceWrappingFlags: struct
-# BraceWrapping:
-#   BeforeLambdaBody: true
+BraceWrapping:
+  BeforeLambdaBody: true

@@ -113,9 +113,7 @@ void timeStdVectorPar(SourceArray data)
 }
 void organPipeStdArray(SourceArray& data)
 {
-    std::cout << "doing organ pipe..." << std::endl;
     int mid = static_cast<int>(HOW_MANY_ELEMENTS / 2);
-
     if (isEvan(mid))
     {
         std::reverse_copy(data.begin(), data.begin() + mid, data.begin() + mid);
@@ -129,7 +127,6 @@ void evaluateRawArray(const SourceArray& random, const SourceArray& sorted,
                       const SourceArray& reversed, const SourceArray& organPipe,
                       const SourceArray& rotated)
 {
-    std::cout << "Evaluating Raw Array.." << std::endl;
     std::cout << "Timing Sequentially..." << std::endl;
     timeRawArraySeq(random);
     timeRawArraySeq(sorted);
@@ -149,7 +146,6 @@ void evaluateStdArray(const SourceArray& random, const SourceArray& sorted,
                       const SourceArray& reversed, const SourceArray& organPipe,
                       const SourceArray& rotated)
 {
-    std::cout << "Evaluating Std Array.." << std::endl;
     std::cout << "Timing Sequentially..." << std::endl;
     timeStdArraySeq(random);
     timeStdArraySeq(sorted);
@@ -169,7 +165,6 @@ void evaluateStdVector(const SourceArray& random, const SourceArray& sorted,
                        const SourceArray& organPipe,
                        const SourceArray& rotated)
 {
-    std::cout << "Evaluating Std Vector.." << std::endl;
     std::cout << "Timing Sequentially..." << std::endl;
     timeStdVectorSeq(random);
     timeStdVectorSeq(sorted);

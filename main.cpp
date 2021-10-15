@@ -1,4 +1,8 @@
-// #include "sortutils.cpp"
+//////////
+// Driver Code for assignment 4
+// @author Nick Sorenson
+// A02287085
+/////////
 #include "sortutils.hpp"
 
 #include <algorithm>
@@ -60,10 +64,13 @@ int main()
     auto reversedArray = reversed();
     auto rotatedArray = rotated();
     auto organPipe = mkOrganPipe();
+    std::cout << "\n--- Raw Array performance ---\n" << std::endl;
     evaluateRawArray(randomArray, sortedArray, reversedArray, organPipe,
                      rotatedArray);
+    std::cout << "\n--- std::array performance ---\n" << std::endl;
     evaluateStdArray(randomArray, sortedArray, reversedArray, organPipe,
                      rotatedArray);
+    std::cout << "\n--- std::vector performance ---\n" << std::endl;
     evaluateStdVector(randomArray, sortedArray, reversedArray, organPipe,
                       rotatedArray);
     return 0;
