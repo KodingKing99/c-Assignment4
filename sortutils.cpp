@@ -5,7 +5,7 @@
 #include <chrono>
 #include <iostream>
 #include <random>
-// #include <execution>
+#include <execution>
 bool isEvan(int num)
 {
     if (num % 2 == 0)
@@ -30,8 +30,7 @@ void timeRawArraySeq(SourceArray data)
         int raw[HOW_MANY_ELEMENTS];
         initializeRawArrayFromStdArray(data, raw);
         auto t0 = steady_clock::now();
-        // std::sort(std::execution::seq, raw, raw + HOW_MANY_ELEMENTS);
-        std::sort(raw, raw + HOW_MANY_ELEMENTS);
+        std::sort(std::execution::seq, raw, raw + HOW_MANY_ELEMENTS);
         auto t1 = steady_clock::now();
         totalTime += t1 - t0;
     }
@@ -46,8 +45,7 @@ void timeRawArrayPar(SourceArray data)
         int raw[HOW_MANY_ELEMENTS];
         initializeRawArrayFromStdArray(data, raw);
         auto t0 = steady_clock::now();
-        // std::sort(std::execution::par, raw, raw + HOW_MANY_ELEMENTS);
-        std::sort(raw, raw + HOW_MANY_ELEMENTS);
+        std::sort(std::execution::par, raw, raw + HOW_MANY_ELEMENTS);
         auto t1 = steady_clock::now();
         totalTime += t1 - t0;
     }
@@ -62,8 +60,7 @@ void timeStdArraySeq(SourceArray data)
         std::array<int, HOW_MANY_ELEMENTS> stdArr;
         std::copy(data.begin(), data.end(), stdArr.begin());
         auto t0 = steady_clock::now();
-        // std::sort(std::execution::seq, stdArr.begin(), stdArr.end());
-        std::sort(stdArr.begin(), stdArr.end());
+        std::sort(std::execution::seq, stdArr.begin(), stdArr.end());
         auto t1 = steady_clock::now();
         totalTime += t1 - t0;
     }
@@ -78,8 +75,7 @@ void timeStdArrayPar(SourceArray data)
         std::array<int, HOW_MANY_ELEMENTS> stdArr;
         std::copy(data.begin(), data.end(), stdArr.begin());
         auto t0 = steady_clock::now();
-        // std::sort(std::execution::par, stdArr.begin(), stdArr.end());
-        std::sort(stdArr.begin(), stdArr.end());
+        std::sort(std::execution::par, stdArr.begin(), stdArr.end());
         auto t1 = steady_clock::now();
         totalTime += t1 - t0;
     }
@@ -94,9 +90,7 @@ void timeStdVectorSeq(SourceArray data)
         std::vector<int> stdVec;
         std::copy(data.begin(), data.end(), std::back_inserter(stdVec));
         auto t0 = steady_clock::now();
-        // std::sort(std::execution::seq, stdVec.begin(),
-        // std::back_inserter(stdVec));
-        std::sort(stdVec.begin(), stdVec.end());
+        std::sort(std::execution::seq, stdVec.begin(), stdVec.end());
         auto t1 = steady_clock::now();
         totalTime += t1 - t0;
     }
@@ -111,9 +105,7 @@ void timeStdVectorPar(SourceArray data)
         std::vector<int> stdVec;
         std::copy(data.begin(), data.end(), std::back_inserter(stdVec));
         auto t0 = steady_clock::now();
-        // std::sort(std::execution::Par, stdVec.begin(),
-        // std::back_inserter(stdVec));
-        std::sort(stdVec.begin(), stdVec.end());
+        std::sort(std::execution::par, stdVec.begin(), stdVec.end());
         auto t1 = steady_clock::now();
         totalTime += t1 - t0;
     }
@@ -122,27 +114,15 @@ void timeStdVectorPar(SourceArray data)
 void organPipeStdArray(SourceArray& data)
 {
     std::cout << "doing organ pipe..." << std::endl;
-    std::cout << "data size: " << data.size() << std::endl;
-    int mid = data.size() / 2;
-    std::cout << "mid point: " << mid << " data at mid: " << data[mid]
-              << std::endl;
-    // auto myIterator = data.begin() + mid;
+    int mid = static_cast<int>(HOW_MANY_ELEMENTS / 2);
 
     if (isEvan(mid))
     {
-
-        // std::reverse(data.begin() + mid, data.end());
         std::reverse_copy(data.begin(), data.begin() + mid, data.begin() + mid);
     }
     else
     {
-        // std::reverse(data.begin() + (mid + 1), data.end());
         std::reverse_copy(data.begin(), data.begin() + mid, data.begin() + mid + 1);
-    }
-    std::cout << "Organ Pipe: " << std::endl;
-    for (int i = mid - 10; i < mid + 10; i++)
-    {
-        std::cout << data[i] << std::endl;
     }
 }
 void evaluateRawArray(const SourceArray& random, const SourceArray& sorted,
@@ -163,6 +143,7 @@ void evaluateRawArray(const SourceArray& random, const SourceArray& sorted,
     timeRawArrayPar(reversed);
     timeRawArrayPar(organPipe);
     timeRawArrayPar(rotated);
+
 }
 void evaluateStdArray(const SourceArray& random, const SourceArray& sorted,
                       const SourceArray& reversed, const SourceArray& organPipe,
