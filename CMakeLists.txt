@@ -15,6 +15,8 @@ set(SOURCE_FILES
 set(UNIT_TEST_FILES
    TestPerformance.cpp)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Export compiler flags for YouCompleteMe
+
 
 #
 # This is the main target
@@ -31,7 +33,12 @@ set_property(TARGET UnitTestRunner PROPERTY CXX_STANDARD 20)
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(${PROJECT_NAME} PRIVATE /W4 /permissive-)
     target_compile_options(UnitTestRunner PRIVATE /W4 /permissive-)
+    set_target_properties(ArrayPerformance PROPERTIES LINK_FLAGS "/STACK:100000000")
+    set_target_properties(UnitTestRunner PROPERTIES LINK_FLAGS "/STACK:100000000")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
+    target_compile_options(UnitTestRunner PRIVATE -Wall -Wextra -pedantic)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
     target_compile_options(UnitTestRunner PRIVATE -Wall -Wextra -pedantic)
 endif()
